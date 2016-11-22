@@ -1,25 +1,16 @@
 <?php
-	function handle_database_error ($url, $error_message) {
+	function handle_database_error($error_message) {
 		if (DEBUG_MODE) {
-			if (!isset($_SESSION['error_data'])) {
-				$_SESSION['error_data'] = '資料庫連結錯誤 (' . mysqli_connect_errno() . ') ' . mysqli_connect_error() . $error_message;
-			}
-			header("Location: " . $url . "");
-			exit();
+			$error_message = htmlspecialchars("Database Error : ".mysqli_connect_errno().mysqli_connect_error().$error_message, ENT_QUOTES);
 		} else {
-			if (!isset($_SESSION['error_data'])) {
-				$_SESSION['error_data'] = '資料庫連結發生異常，請通知網站管理員';
-			}
-			header("Location: " . $url . "");
-			exit();
+			$error_message = "Database Connecting Error.";
 		}
+		header("Location: ".WEB_ERROR_PAGE."?message=".$error_message);
+		exit();
 	}
 	
-	function handle_error ($url, $error_message) {
-		if (!isset($_SESSION['error_data'])) {
-			$_SESSION['error_data'] = $error_message;
-		}
-		header("Location: " . $url . "");
+	function handle_error($error_message) {
+		header("Location: ".WEB_ERROR_PAGE."?message=".htmlspecialchars($error_message, ENT_QUOTES));
 		exit();
 	}
 ?>

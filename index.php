@@ -2,42 +2,76 @@
 	if (!isset($prefix)) {
 		$prefix = "./";
 	}
-	require_once $prefix . "config/visitor_check.php";
-	require_once $prefix . "config/web_language/web_language_home.php";
+	require_once $prefix."config/database_connect.php";
 	
-	if (isset($_POST['languages'])) {
-		if (preg_match("/^[0-2]{1}$/", $_POST['languages'])) {
-			$language_name = array("eng", "cht", "chs");
-			$_SESSION['language'] = $language_name[$_POST['languages']];
-		}
-	}
-	$languages = language_translation_home_index();
-	
-	$ico_link = "";
-	$body = "";
-	$css_link = array($prefix . "scripts/css/pure-min.css");
+	$ico_link = "images/icon.ico";
+	$css_link = array();
 	$js_link = array();
-	display_head("Secura e-sim", $ico_link, $body, $css_link, $js_link);
-	
-	require_once $prefix . "main/sources/navigation.php";
+	display_head($prefix,"E-Sim Tools",$ico_link,$css_link,$js_link);
 ?>
-		<div class="page-wrap">
-			<form name="changelanguage" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="pure-form pure-form-aligned">
-				<fieldset>
-					<div class="pure-control-group">
-						<label for="Languages"><?php echo $languages['language']; ?>：</label>
-						<select name="languages">
-							<option value="0">English</option>
-							<option value="1">繁體中文</option>
-							<option value="2">简体中文</option>
-						</select>
+	<body>
+		<div id="id_wrapper">
+			<div id="id_header">
+<?php require_once $prefix."config_customized/navigation.php"; ?>
+			</div>
+			<div id="id_content">
+				<div id="web_announcement">
+					<div class="heading_center heading_title">
+						<h1>Web Announcement</h1>
 					</div>
-					<div class="pure-controls">
-						<button type="submit" class="pure-button pure-button-primary"><?php echo $languages['submit']; ?></button>
-					</div>
-				</fieldset>
-			</form>
-		</div>
+					<div>
+						<table class="pure-table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Type</th>
+									<th>Content</th>
+									<th>Time</th>
+								</tr>
+							</thead>
+							<tbody>
 <?php
-	display_footer();
+	$sql = "SELECT `id`, `type`, `content`, `time_unix` FROM `".$dbconfig["web_announcement"]."` WHERE `display` = ? ORDER BY `id` DESC";
+	if (!($stmt = $mysqli->prepare($sql))) {
+		handle_database_error($mysqli->error);
+		exit();
+	} else {
+		$stmt->bind_param('i', $display);
+		$display = true;
+		$stmt->execute();
+		$stmt->bind_result($id, $type, $content, $post_time);
+		$announcement_type = array("Update", "Optimization", "Remove");
+		while ($stmt->fetch()) {
+			$post_time = date("Y-m-d", $post_time);
+			if ($id % 2 == 1) {
+				echo <<<EOD
+								<tr class="pure-table-odd">\n
+EOD;
+			} else {
+				echo <<<EOD
+								<tr>\n
+EOD;
+			}
+			echo <<<EOD
+									<td>$id</td>
+									<td>$announcement_type[$type]</td>
+									<td>$content</td>
+									<td>$post_time</td>
+								</tr>\n
+EOD;
+			$i++;
+		}
+		$stmt->close();
+	}
 ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="go_to_top">
+					<img src="<?php echo $prefix; ?>images/go_to_top.png">
+				</div>
+			</div>
+<?php display_footer(); ?>
+	</body>
+</html>

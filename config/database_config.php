@@ -4,12 +4,23 @@
 	define("DATABASE_PASSWORD" ,  "");
 	define("DATABASE_NAME" ,  "esimtw");
 	
-	define("DEBUG_MODE", 0);
-	define("ADMIN_ONLY", 0);
-	define("IP_FILTER", 2);
-	define("REGISTER_ALLOW", 1);
-	define("LOGIN_ALLOW", 1);
-	define("UPDATEINFO_ALLOW", 1);
+	$dbconfig["account"] = "account";
+	$dbconfig["citizen_name"] = "game_citizen_name";
+	$dbconfig["user_data"] = "user_data";
+	$dbconfig["news_data"] = "news_data";
+	$dbconfig["web_announcement"] = "web_announcement";
+	$dbconfig["web_login_log"] = "web_login_log";
+	$dbconfig["web_login_remember"] = "web_login_remember";
+	$dbconfig["battle_chat"] = "tools_battle_info_chat";
 	
-	$web_url = "http://crux.coder.tw/freedom/scripts/error/error.php";
+	define("DEBUG_MODE", false);
+	define("ADMIN_ONLY", false);
+	
+	define("REGISTER_ALLOW", true);
+	define("LOGIN_ALLOW", true);
+	define("UPDATEINFO_ALLOW", true);
+	define("WAR_INFO_QUERY", true);
+	define("WAR_INFO_QUERY_CITIZEN", true);
+	
+	define("WEB_ERROR_PAGE", "http://crux.coder.tw/freedom/error.php");
 ?>

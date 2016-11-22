@@ -31,6 +31,7 @@ audio:not([controls]){
 
 html{
 	height: 100%;
+	font-size:100%;
 	-ms-text-size-adjust:100%;
 	-webkit-text-size-adjust:100%;
 }
@@ -740,7 +741,7 @@ table{
 	text-align:right;
 	display:inline-block;
 	vertical-align:middle;
-	width:8.5em;
+	width:7em;
 	margin:0 1em 0 0;
 }
 
@@ -1178,7 +1179,7 @@ table{
 
 #id_content {
 	padding-top: 50px;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 
 #id_footer {
@@ -1214,13 +1215,13 @@ table{
 }
 
 #chat_box div input {
-	width: 50%;
+	width: 768px;
 }
 
 #battle_info_chat_content {
-	/*padding-top: 32px;*/
-	width: 95%;
-	height: 525px;
+	padding-top: 32px;
+	width: 960px;
+	height: 535px;
 	margin: 0 auto;
 	overflow: auto;
 }
@@ -1234,19 +1235,19 @@ table{
 }
 
 .poster {
-	width: 15%;
+	width: 160px;
 	vertical-align: top;
 }
 
 .post_content {
 	padding-left: 10px;
-	width: 60%;
+	width: 600px;
 	text-align: left;
 	vertical-align: top;
 }
 
 .post_time {
-	width: 20%;
+	width: 150px;
 	text-align: right;
 	vertical-align: top;
 }
