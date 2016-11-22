@@ -1,0 +1,22 @@
+body {
+    padding-top: 70px;
+}
+
+footer {
+    padding-top: 10px;
+    padding-bottom: 12px;
+}
+
+.home_page {
+    width: 80%;
+    background-color: #D8D8D8;
+    border-radius: 6px;
+}
+
+.shadow {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+}
+
+.heading {
+    padding: 5px 0 0 5px;
+}
