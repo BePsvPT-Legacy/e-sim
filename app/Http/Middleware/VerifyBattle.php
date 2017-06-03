@@ -59,7 +59,7 @@ class VerifyBattle
     {
         $job = new SyncBattle($battle->server, $battle->battle_id);
 
-        dispatch($job);
+        dispatch($job->onQueue('high'));
     }
 
     /**

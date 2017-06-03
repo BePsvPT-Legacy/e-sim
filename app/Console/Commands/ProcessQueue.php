@@ -27,13 +27,14 @@ class ProcessQueue extends Command
      */
     public function handle()
     {
-        $i = 10;
+        $i = 20;
 
         while ($i--) {
             $this->call('queue:work', [
                 '--once' => true,
                 '--memory' => 256,
                 '--timeout' => 0,
+                '--queue' => 'high,default',
             ]);
 
             sleep(1);
