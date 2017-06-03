@@ -86,6 +86,6 @@ return [
     |
     */
 
-    'prefix' => 'esim',
+    'prefix' => 'esim-',
 
 ];
