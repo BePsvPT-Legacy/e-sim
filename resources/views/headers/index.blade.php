@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <a class="navbar-brand" href="{{ route('home') }}">E-Sim</a>
+      <a class="navbar-brand" href="{{ route('home') }}/">E-Sim</a>
 
       <div class="collapse navbar-collapse" id="navbar-dropdown">
         <ul class="navbar-nav mr-auto"></ul>

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Battle;
+use Artisan;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Bus\Queueable;
@@ -70,6 +71,8 @@ class SyncBattle implements ShouldQueue
         }
 
         $this->battle->update(['round' => $round]);
+
+        Artisan::queue('sync');
     }
 
     /**

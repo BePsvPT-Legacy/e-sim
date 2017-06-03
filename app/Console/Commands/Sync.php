@@ -32,14 +32,12 @@ class Sync extends Command
      */
     public function handle()
     {
-        $now = Carbon::now();
-
         collect()
             ->merge($this->getMissingCitizens())
             ->merge($this->getOutdatedCitizens())
             ->merge($this->getMissingMilitaryUnits())
             ->merge($this->getOutdatedMilitaryUnits())
-            ->each(function (Model $model) use ($now) {
+            ->each(function (Model $model) {
                 $attrs = $model->getAttributes();
 
                 $name = isset($attrs['citizen_id']) ? 'Citizen' : 'MilitaryUnit';
@@ -50,7 +48,7 @@ class Sync extends Command
 
                 $job = new $syncName($attrs['server'], $attrs[$idName]);
 
-                dispatch($job->delay($now->addSeconds(5)));
+                dispatch($job);
             });
     }
 

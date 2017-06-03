@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\ProcessQueue::class,
         Commands\Sync::class,
     ];
 
@@ -24,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sync')->dailyAt('01:00');
+        $schedule->command('queue:process')
+            ->everyMinute()
+            ->withoutOverlapping();
     }
 
     /**
