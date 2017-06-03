@@ -84,7 +84,10 @@
           </td>
 
           <td>
-            @if ($fight['attacker']['damage'] && $fight['defender']['damage'])
+            @php ($division = ($fight['attacker']['damage'] ?: 1) / ($fight['defender']['damage'] ?: 1))
+            @php ($division = ($division < 1) ? (1 / $division) : $division)
+
+            @if ($fight['attacker']['damage'] && $fight['defender']['damage'] && $division <= 10)
               <span class="text-danger">
                 <span class="sr-only">@lang('Chaos')</span>
 
