@@ -58,7 +58,12 @@
               <a
                 href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
                 target="_blank"
-              >{{ $fight['citizen']['name'] ?? $fight['citizen']['id'] }}</a>
+                @if (mb_strlen($fight['citizen']['name']) > 16)
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="{{ $fight['citizen']['name'] }}"
+                @endif
+              >{{ str_limit($fight['citizen']['name'] ?? $fight['citizen']['id'], 16) }}</a>
             @endif
           </td>
 
@@ -69,7 +74,12 @@
               <a
                 href="https://{{ $battle->server }}.e-sim.org/militaryUnit.html?id={{ $fight['military_unit']['id'] }}"
                 target="_blank"
-              >{{ $fight['military_unit']['name'] ?? $fight['military_unit']['id'] }}</a>
+                @if (mb_strlen($fight['military_unit']['name']) > 16)
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="{{ $fight['military_unit']['name'] }}"
+                @endif
+              >{{ str_limit($fight['military_unit']['name'] ?? $fight['military_unit']['id'], 16) }}</a>
             @endif
           </td>
 
