@@ -27,7 +27,7 @@ class ProcessQueue extends Command
      */
     public function handle()
     {
-        $i = 20;
+        $i = 10;
 
         while ($i--) {
             $this->call('queue:work', [
