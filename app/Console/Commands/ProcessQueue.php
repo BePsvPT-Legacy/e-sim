@@ -35,6 +35,8 @@ class ProcessQueue extends Command
                 '--memory' => 256,
                 '--timeout' => 0,
             ]);
+
+            sleep(1);
         }
     }
 }
