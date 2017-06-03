@@ -11,14 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Controller@home')->name('home');
 
 Route::group(['prefix' => '{server}'], function () {
-    Route::group(['prefix' => 'battle/{id}', 'as' => 'battle.'], function () {
-        Route::get('/', ['as' => 'entire', 'uses' => 'BattleController@entire']);
-        Route::get('mu', ['as' => 'mu', 'uses' => 'BattleController@mu']);
-        Route::get('{round}', ['as' => 'round', 'uses' => 'BattleController@round']);
+    Route::group(['prefix' => 'battle/{id}', 'middleware' => ['battle'], 'as' => 'battle.'], function () {
+        Route::get('/', 'BattleController@entire')->name('entire');
+        Route::get('mu', 'BattleController@mu')->name('mu');
+        Route::get('{round}', 'BattleController@round')->name('round');
     });
 });

@@ -1,9 +1,47 @@
+html, body {
+  min-height: 100vh;
+}
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
 
-// Variables
-@import "variables";
+main {
+  flex: 1 0 auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+table {
+  thead {
+    th {
+      text-align: center;
+      //vertical-align: middle !important;
+    }
+  }
+
+  tbody {
+    td {
+      vertical-align: middle !important;
+    }
+  }
+}
+
+.statistic-list {
+  margin-bottom: 2rem;
+
+  p {
+    margin-bottom: .5rem;
+  }
+
+  .example {
+    margin-top: .5rem;
+  }
+}
+
+.dataTables_wrapper.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}

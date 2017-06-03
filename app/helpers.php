@@ -17,3 +17,18 @@ if (! function_exists('fetch_json')) {
         return json_decode($content, true);
     }
 }
+
+if (! function_exists('nf')) {
+    /**
+     * Number format wrapper.
+     *
+     * @param $number
+     * @param int $decimals
+     *
+     * @return string
+     */
+    function nf($number, $decimals = 0)
+    {
+        return number_format($number, $decimals);
+    }
+}
