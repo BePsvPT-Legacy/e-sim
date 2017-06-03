@@ -6,6 +6,7 @@ use Agent;
 use App;
 use Carbon\Carbon;
 use Closure;
+use Cookie;
 
 class Localization
 {
@@ -25,19 +26,33 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-        $lowerLocales = array_map('mb_strtolower', $this->locales);
+        $lng = config('app.locale');
 
-        foreach (Agent::languages() as $language) {
-            $index = array_search($language, $lowerLocales);
+        if (in_array($request->query('lng'), $this->locales)) {
+            $lng = $request->query('lng');
+        } elseif ($request->hasCookie('lng')) {
+            $lng = $request->cookie('lng');
+        } else {
+            $lowerLocales = array_map('mb_strtolower', $this->locales);
 
-            if (false !== $index) {
-                App::setLocale($this->locales[$index]);
-                Carbon::setLocale(str_replace('-', '_', $this->locales[$index]));
+            foreach (Agent::languages() as $language) {
+                $index = array_search($language, $lowerLocales);
 
-                break;
+                if (false !== $index) {
+                    $lng = $this->locales[$index];
+
+                    break;
+                }
             }
         }
 
-        return $next($request);
+        App::setLocale($lng);
+        Carbon::setLocale(str_replace('-', '_', $lng));
+
+        $response = $next($request);
+
+        $response->cookie( Cookie::forever('lng', $lng));
+
+        return $response;
     }
 }
