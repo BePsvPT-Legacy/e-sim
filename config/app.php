@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
 
