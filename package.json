@@ -13,5 +13,8 @@
     "cross-env": "^5.0.0",
     "laravel-mix": "0.*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "query-string": "^4.3.4",
+    "store": "^2.0.4"
+  }
 }
