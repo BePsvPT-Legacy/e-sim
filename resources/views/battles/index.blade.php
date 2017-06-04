@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main')
-  <ul class="pagination {{ $battle->round < 13 ? 'pagination-lg' : '' }}">
+  <ul class="pagination {{ $battle->round < 13 ? 'pagination-lg' : '' }}" style="overflow-x: auto; white-space: nowrap;">
     <li class="page-item {{ Route::currentRouteNamed('battle.entire') ? 'active' : '' }}">
       <a
         class="page-link"
@@ -31,14 +31,14 @@
   <table class="table table-bordered table-hover text-center data-table" cellspacing="0" data-order='[[3, "desc"]]'>
     <thead>
       <tr>
-        <th rowspan="2">@lang('Citizen')</th>
+        <th rowspan="2" style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">@lang('Citizen')</th>
         <th rowspan="2">@lang('Military Unit')</th>
-        <th rowspan="2">@lang('Team')</th>
+        <th rowspan="2" class="hidden-md-down">@lang('Team')</th>
         <th rowspan="2">@lang('Damage')</th>
-        <th colspan="6">@lang('Weapon Usage')</th>
+        <th colspan="6" class="hidden-sm-down">@lang('Weapon Usage')</th>
       </tr>
 
-      <tr>
+      <tr class="hidden-sm-down">
         <th>Q0</th>
         <th>Q1</th>
         <th>Q2</th>
@@ -51,19 +51,13 @@
     <tbody>
       @forelse ($fights as $fight)
         <tr>
-          <td>
-            @if (Route::currentRouteNamed('battle.mu'))
-              <span>-</span>
-            @else
+          <td style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">
+            @if (! Route::currentRouteNamed('battle.mu'))
               <a
                 href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
                 target="_blank"
-                @if (mb_strlen($fight['citizen']['name']) > 16)
-                  data-toggle="tooltip"
-                  data-placement="right"
-                  title="{{ $fight['citizen']['name'] }}"
-                @endif
-              >{{ str_limit($fight['citizen']['name'] ?? $fight['citizen']['id'], 16) }}</a>
+                class="break-all"
+              >{{ $fight['citizen']['name'] ?? $fight['citizen']['id'] }}</a>
             @endif
           </td>
 
@@ -74,16 +68,12 @@
               <a
                 href="https://{{ $battle->server }}.e-sim.org/militaryUnit.html?id={{ $fight['military_unit']['id'] }}"
                 target="_blank"
-                @if (mb_strlen($fight['military_unit']['name']) > 16)
-                  data-toggle="tooltip"
-                  data-placement="right"
-                  title="{{ $fight['military_unit']['name'] }}"
-                @endif
-              >{{ str_limit($fight['military_unit']['name'] ?? $fight['military_unit']['id'], 16) }}</a>
+                class="break-all"
+              >{{ $fight['military_unit']['name'] ?? $fight['military_unit']['id'] }}</a>
             @endif
           </td>
 
-          <td>
+          <td class="hidden-md-down">
             @php ($division = ($fight['attacker']['damage'] ?: 1) / ($fight['defender']['damage'] ?: 1))
             @php ($division = ($division < 1) ? (1 / $division) : $division)
 
@@ -140,7 +130,9 @@
           </td>
 
           @foreach(range(0, 5) as $key)
-            <td>{{ $fight['attacker']['weapon'][$key] + $fight['defender']['weapon'][$key] }}</td>
+            <td
+              class="hidden-sm-down"
+            >{{ $fight['attacker']['weapon'][$key] + $fight['defender']['weapon'][$key] }}</td>
           @endforeach
         </tr>
       @empty

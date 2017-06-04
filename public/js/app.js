@@ -63,14 +63,13 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -78,7 +77,9 @@ $(function () {
   $('table.data-table').DataTable({
     info: false,
     pageLength: 30,
-    language: __webpack_require__(6)
+    pagingType: 'full',
+    processing: true,
+    language: __webpack_require__(2)
   });
 });
 
@@ -90,17 +91,6 @@ $(function () {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(0);
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var languages = ['en-US', 'zh-TW'];
@@ -136,15 +126,15 @@ try {
   }
 }
 
-module.exports = __webpack_require__(7)("./" + language + '.json');
+module.exports = __webpack_require__(3)("./" + language + '.json');
 
 /***/ }),
-/* 7 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./en-US.json": 8,
-	"./zh-TW.json": 9
+	"./en-US.json": 4,
+	"./zh-TW.json": 5
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -160,10 +150,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 7;
+webpackContext.id = 3;
 
 /***/ }),
-/* 8 */
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -191,7 +181,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -217,6 +207,14 @@ module.exports = {
 		"sSortDescending": ": 降冪排列"
 	}
 };
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+module.exports = __webpack_require__(1);
+
 
 /***/ })
 /******/ ]);
