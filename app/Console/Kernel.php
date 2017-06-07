@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\SyncCountry;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,6 +28,10 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('queue:process')
             ->everyMinute();
+
+        $schedule->call(function () {
+            dispatch(new SyncCountry);
+        })->weekly();
     }
 
     /**

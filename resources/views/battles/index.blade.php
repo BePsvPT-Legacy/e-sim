@@ -51,12 +51,14 @@
     <tbody>
       @forelse ($fights as $fight)
         <tr>
-          <td style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">
+          <td class="text-left" style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">
             @if (! Route::currentRouteNamed('battle.mu'))
+              <span class="flag-icon flag-icon-{{ $fight['citizen']['citizenship'] }}"></span>
+
               <a
                 href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
                 target="_blank"
-                class="break-all"
+                class="pl-1 break-all"
               >{{ $fight['citizen']['name'] ?? $fight['citizen']['id'] }}</a>
             @endif
           </td>
