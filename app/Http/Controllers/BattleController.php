@@ -112,11 +112,16 @@ class BattleController extends Controller
      */
     protected function newRecord(Fight $fight)
     {
+        $country = Country::where('country_id', $fight->citizenship_id)->first();
+
         return [
             'citizen' => [
                 'id' => $fight->citizen_id,
                 'name' => Citizen::name($fight->server, $fight->citizen_id),
-                'citizenship' => Country::where('country_id', $fight->citizenship_id)->first()->code,
+            ],
+            'citizenship' => [
+                'name' => $country->name,
+                'code' => $country->code,
             ],
             'military_unit' => [
                 'id' => $fight->military_unit_id,

@@ -53,7 +53,12 @@
         <tr>
           <td class="text-left" style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">
             @if (! Route::currentRouteNamed('battle.mu'))
-              <span class="flag-icon flag-icon-{{ $fight['citizen']['citizenship'] }}"></span>
+              <span
+                class="flag-icon flag-icon-{{ $fight['citizenship']['code'] }}"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ $fight['citizenship']['name'] }}"
+              ></span>
 
               <a
                 href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
@@ -87,7 +92,7 @@
                   class="fa fa-balance-scale"
                   aria-hidden="true"
                   data-toggle="tooltip"
-                  data-placement="right"
+                  data-placement="top"
                   title="@lang('Chaos')"
                 ></i>
               </span>
@@ -99,7 +104,7 @@
                   class="fa fa-location-arrow"
                   aria-hidden="true"
                   data-toggle="tooltip"
-                  data-placement="right"
+                  data-placement="top"
                   title="@lang('Attacker')"
                 ></i>
               </span>
@@ -111,7 +116,7 @@
                   class="fa fa-shield"
                   aria-hidden="true"
                   data-toggle="tooltip"
-                  data-placement="right"
+                  data-placement="top"
                   title="@lang('Defender')"
                 ></i>
               </span>
