@@ -57,7 +57,7 @@
                 class="flag-icon flag-icon-{{ $fight['citizenship']['code'] }}"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="{{ $fight['citizenship']['name'] }}"
+                title="@lang($fight['citizenship']['name'])"
               ></span>
 
               <a
