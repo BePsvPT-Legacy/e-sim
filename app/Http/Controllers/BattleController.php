@@ -11,7 +11,7 @@ use Cache;
 class BattleController extends Controller
 {
     /**
-     * Entire battle fights statistics.
+     * Battle fights statistics.
      *
      * @param string $server
      * @param int $id
@@ -32,7 +32,7 @@ class BattleController extends Controller
     }
 
     /**
-     * Specific round fights statistics.
+     * Round fights statistics.
      *
      * @param string $server
      * @param int $id
@@ -55,7 +55,7 @@ class BattleController extends Controller
     }
 
     /**
-     * Entire battle military unit fights statistics.
+     * Military unit fights statistics.
      *
      * @param string $server
      * @param int $id
@@ -71,6 +71,27 @@ class BattleController extends Controller
                 ->get();
 
             return $this->transformFights($fights, 'military_unit_id');
+        });
+
+        return view('battles.index', compact('fights'));
+    }
+
+    /**
+     * Country fights statistics.
+     *
+     * @param string $server
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function country($server, $id)
+    {
+        $fights = Cache::remember("battle-{$id}-country", 60, function () use ($server, $id) {
+            $fights = Fight::where('server', $server)
+                ->where('battle_id', $id)
+                ->get();
+
+            return $this->transformFights($fights, 'citizenship_id');
         });
 
         return view('battles.index', compact('fights'));

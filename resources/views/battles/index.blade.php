@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main')
-  <ul class="pagination {{ $battle->round < 13 ? 'pagination-lg' : '' }}" style="overflow-x: auto; white-space: nowrap;">
+  <ul class="pagination {{ $battle->round < 11 ? 'pagination-lg' : '' }}" style="overflow-x: auto; white-space: nowrap;">
     <li class="page-item {{ Route::currentRouteNamed('battle.entire') ? 'active' : '' }}">
       <a
         class="page-link"
@@ -24,6 +24,13 @@
         href="{{ route('battle.mu', [$battle->server, $battle->battle_id]) }}"
       >@lang('Military Unit')</a>
     </li>
+
+    <li class="page-item {{ Route::currentRouteNamed('battle.country') ? 'active' : '' }}">
+      <a
+        class="page-link"
+        href="{{ route('battle.country', [$battle->server, $battle->battle_id]) }}"
+      >@lang('Country')</a>
+    </li>
   </ul>
 
   <br>
@@ -31,8 +38,11 @@
   <table class="table table-bordered table-hover text-center data-table" cellspacing="0" data-order='[[3, "desc"]]'>
     <thead>
       <tr>
-        <th rowspan="2" style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}">@lang('Citizen')</th>
-        <th rowspan="2">@lang('Military Unit')</th>
+        <th
+          rowspan="2"
+          style="{{ Route::currentRouteNamed('battle.mu') ? 'display: none;' : '' }}"
+        >@lang(Route::currentRouteNamed('battle.country') ? 'Country' : 'Citizen')</th>
+        <th rowspan="2" style="{{ Route::currentRouteNamed('battle.country') ? 'display: none;' : '' }}">@lang('Military Unit')</th>
         <th rowspan="2" class="hidden-md-down">@lang('Team')</th>
         <th rowspan="2">@lang('Damage')</th>
         <th colspan="6" class="hidden-sm-down">@lang('Weapon Usage')</th>
@@ -60,16 +70,22 @@
                 title="@lang($fight['citizenship']['name'])"
               ></span>
 
-              <a
-                href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
-                target="_blank"
-                class="pl-1 break-all"
-              >{{ $fight['citizen']['name'] ?? $fight['citizen']['id'] }}</a>
+              @if (Route::currentRouteNamed('battle.country'))
+                <span
+                  class="pl-1 break-all"
+                >@lang($fight['citizenship']['name'])</span>
+              @else
+                <a
+                  href="https://{{ $battle->server }}.e-sim.org/profile.html?id={{ $fight['citizen']['id'] }}"
+                  target="_blank"
+                  class="pl-1 break-all"
+                >{{ $fight['citizen']['name'] ?? $fight['citizen']['id'] }}</a>
+              @endif
             @endif
           </td>
 
-          <td>
-            @if (is_null($fight['military_unit']['id']))
+          <td style="{{ Route::currentRouteNamed('battle.country') ? 'display: none;' : '' }}">
+            @if (is_null($fight['military_unit']['id']) || Route::currentRouteNamed('battle.country'))
               <span>-</span>
             @else
               <a

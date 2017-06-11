@@ -43,6 +43,18 @@
 
               <p class="example break-all">e.g: <a href="{{ route('battle.mu', ['secura', 777]) }}">{{ route('battle.mu', ['secura', 777]) }}</a></p>
             </li>
+
+            <li class="statistic-list">
+              <p class="lead">@lang('Country')</p>
+
+              <div class="card">
+                <div class="card-block break-all">
+                  <span>{{ url('/') }}/{server}/battle/{battle_id}/country</span>
+                </div>
+              </div>
+
+              <p class="example break-all">e.g: <a href="{{ route('battle.country', ['secura', 777]) }}">{{ route('battle.country', ['secura', 777]) }}</a></p>
+            </li>
           </ul>
         </li>
       </ol>
