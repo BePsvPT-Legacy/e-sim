@@ -116,7 +116,7 @@ class BattleController extends Controller
 
             $side = $fight->is_defender ? 'defender' : 'attacker';
 
-            $result[$fight->{$group}]['round'][$fight->round]['damage'][$side] += $fight->damage;
+            $result[$fight->{$group}]['damage'] += $fight->damage;
             $result[$fight->{$group}][$side]['damage'] += $fight->damage;
             $result[$fight->{$group}][$side]['weapon'][$fight->weapon] += (($fight->is_berserk) ? 5 : 1);
         }
@@ -133,24 +133,22 @@ class BattleController extends Controller
      */
     protected function newRecord(Fight $fight)
     {
-        $country = Country::where('country_id', $fight->citizenship_id)->first();
-
         return [
             'citizen' => [
                 'id' => $fight->citizen_id,
                 'name' => Citizen::name($fight->server, $fight->citizen_id),
             ],
-            'citizenship' => [
-                'name' => $country->name,
-                'code' => $country->code,
-            ],
+            'citizenship' => array_only(
+                Country::where('country_id', $fight->citizenship_id)->first()->toArray(),
+                ['name', 'code']
+            ),
             'military_unit' => [
                 'id' => $fight->military_unit_id,
                 'name' => MilitaryUnit::name($fight->server, $fight->military_unit_id),
             ],
+            'damage' => 0,
             'attacker' => ['damage' => 0, 'weapon' => array_fill(0, 6, 0)],
             'defender' => ['damage' => 0, 'weapon' => array_fill(0, 6, 0)],
-            'round' => array_fill(1, 15, ['damage' => ['attacker' => 0, 'defender' => 0]]),
         ];
     }
 }

@@ -34,8 +34,8 @@ class Sync extends Command
     {
         collect()
             ->merge($this->getMissingCitizens())
-            ->merge($this->getOutdatedCitizens())
             ->merge($this->getMissingMilitaryUnits())
+            ->merge($this->getOutdatedCitizens())
             ->merge($this->getOutdatedMilitaryUnits())
             ->each(function (Model $model) {
                 $attrs = $model->getAttributes();

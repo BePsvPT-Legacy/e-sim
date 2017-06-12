@@ -14,18 +14,18 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-globe" aria-hidden="true"></i>
-              <span class="sr-only">Language</span>
+              <span>Language</span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="language-dropdown">
               <a
                 class="dropdown-item"
-                href="{{ request()->getUri() }}?lng=zh-TW"
+                href="{{ request()->url() }}?lng=zh-TW"
               >繁體中文</a>
 
               <a
                 class="dropdown-item"
-                href="{{ request()->getUri() }}?lng=en"
+                href="{{ request()->url() }}?lng=en"
               >English</a>
             </div>
           </li>

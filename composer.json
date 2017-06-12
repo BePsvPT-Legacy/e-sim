@@ -51,6 +51,14 @@
       "php artisan ide-helper:generate",
       "php artisan ide-helper:meta",
       "php artisan optimize"
+    ],
+    "upgrade": [
+      "php artisan down --ansi",
+      "php -r \"unlink('bootstrap/cache/services.php');\"",
+      "git pull --rebase",
+      "composer install --no-dev --ansi",
+      "php artisan migrate --force --ansi",
+      "php artisan up --ansi"
     ]
   },
   "config": {

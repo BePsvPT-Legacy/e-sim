@@ -19,7 +19,6 @@ table {
   thead {
     th {
       text-align: center;
-      //vertical-align: middle !important;
     }
   }
 
@@ -30,20 +29,12 @@ table {
   }
 }
 
-.break-all {
-  word-break: break-all;
+.hidden {
+  display: none;
 }
 
-.statistic-list {
-  margin-bottom: 2rem;
-
-  p {
-    margin-bottom: .5rem;
-  }
-
-  .example {
-    margin-top: .5rem;
-  }
+.break-all {
+  word-break: break-all;
 }
 
 .dataTables_wrapper.container-fluid {

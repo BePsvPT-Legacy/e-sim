@@ -25,10 +25,6 @@ class Citizen extends Model
             ->where('citizen_id', $citizenId)
             ->first();
 
-        if (is_null($citizen)) {
-            return null;
-        }
-
-        return $citizen->name;
+        return $citizen->name ?? null;
     }
 }

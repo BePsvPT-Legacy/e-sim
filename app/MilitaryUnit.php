@@ -25,10 +25,6 @@ class MilitaryUnit extends Model
             ->where('military_unit_id', $militaryUnitId)
             ->first();
 
-        if (is_null($mu)) {
-            return null;
-        }
-
-        return $mu->name;
+        return $mu->name ?? null;
     }
 }

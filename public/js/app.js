@@ -199,13 +199,15 @@ function isObject(val) {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
-  $('table.data-table').DataTable({
-    info: false,
-    pageLength: 30,
-    pagingType: 'full',
-    processing: true,
-    language: __webpack_require__(3)
-  });
+  if ($.fn.DataTable) {
+    $('table.data-table').DataTable({
+      info: false,
+      pageLength: 30,
+      pagingType: 'full',
+      processing: true,
+      language: __webpack_require__(3)
+    });
+  }
 });
 
 /***/ }),

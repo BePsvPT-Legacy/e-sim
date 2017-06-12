@@ -1,5 +1,19 @@
 <?php
 
+if (! function_exists('is_route')) {
+    /**
+     * currentRouteNamed wrapper.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    function is_route($name)
+    {
+        return Route::currentRouteNamed($name);
+    }
+}
+
 if (! function_exists('fetch_json')) {
     /**
      * Send http request and return json decode content.
@@ -20,7 +34,7 @@ if (! function_exists('fetch_json')) {
 
 if (! function_exists('nf')) {
     /**
-     * Number format wrapper.
+     * number_format wrapper.
      *
      * @param $number
      * @param int $decimals

@@ -27,10 +27,10 @@ class VerifyBattle
     public function handle(Request $request, Closure $next)
     {
         $server = $request->route('server');
-        $battleId = $request->route('id');
+        $battleId = intval($request->route('id'));
 
         abort_if(! in_array($server, $this->servers), 404);
-        abort_if(! (is_int($battleId) || ctype_digit($battleId)), 404);
+        abort_if(! ($battleId > 0), 404);
 
         $battle = Battle::firstOrCreate([
             'server' => $server,
