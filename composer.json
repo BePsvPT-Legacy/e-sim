@@ -54,7 +54,7 @@
     ],
     "upgrade": [
       "php artisan down --ansi",
-      "php -r \"unlink('bootstrap/cache/services.php');\"",
+      "rm -f bootstrap/cache/services.php",
       "git pull --rebase",
       "composer install --no-dev --ansi",
       "php artisan migrate --force --ansi",
