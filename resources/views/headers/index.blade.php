@@ -20,12 +20,12 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="language-dropdown">
               <a
                 class="dropdown-item"
-                href="{{ request()->url() }}?lng=zh-TW"
+                href="{{ request()->getUri() }}?lng=zh-TW"
               >繁體中文</a>
 
               <a
                 class="dropdown-item"
-                href="{{ request()->url() }}?lng=en"
+                href="{{ request()->getUri() }}?lng=en"
               >English</a>
             </div>
           </li>
