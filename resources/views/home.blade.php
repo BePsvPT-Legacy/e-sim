@@ -33,6 +33,18 @@
             ])
           </ul>
         </li>
+
+        <li>
+          <h3>@lang('Equipment')</h3>
+
+          <ul class="pl-4">
+            @include('component', [
+              'title' => 'Information',
+              'template' => '/{server}/equipment/{equipment_id}',
+              'url' => route('equipment.show', ['secura', '666,777']),
+            ])
+          </ul>
+        </li>
       </ol>
     </div>
   </div>
