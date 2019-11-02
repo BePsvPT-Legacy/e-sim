@@ -20,4 +20,9 @@ Route::group(['prefix' => '{server}'], function () {
         Route::get('mu', 'BattleController@mu')->name('mu');
         Route::get('{round}', 'BattleController@round')->name('round');
     });
+
+    Route::group(['prefix' => 'equipment', 'as' => 'equipment.'], function () {
+        Route::get('search', 'EquipmentController@search')->name('search');
+        Route::get('{id}', 'EquipmentController@show')->name('show');
+    });
 });
