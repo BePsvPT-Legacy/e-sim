@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\ImportEquipment::class,
         Commands\ProcessQueue::class,
         Commands\Sync::class,
     ];
